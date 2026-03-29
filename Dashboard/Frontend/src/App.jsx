@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import ActiveTests from "./pages/ActiveTest";
 import ViewTest from "./pages/ViewTest";
 import CreateTest from "./pages/CreateTest";
+import Home from "./pages/Home";
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem("token");
@@ -19,6 +20,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="" element= {<Home/>}/>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route
