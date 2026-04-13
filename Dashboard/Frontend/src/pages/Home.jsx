@@ -38,7 +38,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-white dark:bg-slate-950 text-gray-900 dark:text-white transition-colors">
+    <div className="relative min-h-screen overflow-hidden bg-background dark:bg-background text-gray-900 dark:text-white transition-colors">
 
       {/* 🌊 GLOBAL Ripple Background */}
       <div className="absolute inset-0 -z-10 opacity-50 pointer-events-none">
@@ -51,7 +51,7 @@ export default function Home() {
       {/* 🌗 Theme Toggle */}
       <button
         onClick={toggleTheme}
-        className="fixed bottom-6 right-6 z-50 px-4 py-2 rounded-xl bg-gray-200 dark:bg-slate-800 shadow-lg"
+        className="fixed bottom-6 right-6 z-50 px-4 py-2 rounded-xl bg-card shadow-lg"
       >
         {dark ? "☀️ Light" : "🌙 Dark"}
       </button>

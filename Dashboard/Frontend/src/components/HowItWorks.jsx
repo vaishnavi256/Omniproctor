@@ -115,8 +115,7 @@ const HowItWorks = () => {
   return (
     <section className="py-24 px-6 
       
-      bg-background
-      dark:bg-slate-950">
+    ">
       
       <div className="max-w-5xl mx-auto text-center">
         <motion.p

@@ -44,7 +44,7 @@ const Login = () => {
   };
 
   return (
-    <div className="dark flex min-h-screen bg-background">
+    <div className="flex h-screen bg-gray-100">
       {/* Left branding panel */}
       <motion.div
         initial={{ opacity: 0, x: -80 }}
@@ -53,22 +53,11 @@ const Login = () => {
         className="hidden lg:flex w-1/2 relative overflow-hidden flex-col justify-center items-center p-16"
         style={{
           background:
-            "linear-gradient(135deg, hsl(220 90% 56%), hsl(230 90% 66%), hsl(240 80% 50%))",
+            "linear-gradient(135deg, hsl(0 0% 0%), hsl(0 0% 25%), hsl(0 0% 50%))",
         }}
       >
         {/* Floating orbs */}
-        <motion.div
-          className="absolute top-20 left-20 w-72 h-72 rounded-full opacity-20"
-          style={{ background: "hsl(230 90% 80%)" }}
-          animate={{ scale: [1, 1.2, 1], x: [0, 30, 0], y: [0, -20, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-32 right-16 w-56 h-56 rounded-full opacity-15"
-          style={{ background: "hsl(210 90% 80%)" }}
-          animate={{ scale: [1, 1.3, 1], x: [0, -20, 0], y: [0, 30, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
+        
 
         <motion.div
           initial={{ scale: 0 }}
@@ -96,7 +85,7 @@ const Login = () => {
           transition={{ delay: 0.65, duration: 0.6 }}
           className="relative z-10 text-white/70 text-center max-w-sm mt-4 text-lg leading-relaxed"
         >
-          Secure, AI-powered online proctoring ensuring fairness in every examination.
+          Secure, online proctoring ensuring fairness in every examination.
         </motion.p>
 
         {/* Feature pills */}
@@ -106,7 +95,7 @@ const Login = () => {
           transition={{ delay: 0.9 }}
           className="relative z-10 flex flex-wrap gap-3 mt-10 justify-center"
         >
-          {["AI Monitoring", "Identity Verification", "Real-time Reports"].map(
+          {["Background Monitoring", "Identity Verification", "Real-time Reports"].map(
             (feature, i) => (
               <motion.span
                 key={feature}
