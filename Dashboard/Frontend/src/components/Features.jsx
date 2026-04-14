@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
-import { ScanFace, Eye, AudioLines, Users, MonitorX, FileBarChart } from "lucide-react";
+import {
+  ScanFace,
+  Eye,
+  AudioLines,
+  Users,
+  MonitorX,
+  FileBarChart,
+} from "lucide-react";
 import FeatureCard from "./FeatureCard";
 
 const features = [
@@ -37,21 +44,14 @@ const features = [
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 px-2 max-w-6xl mx-auto">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-16"
-      >
+    <section id="features" className="py-24 px-4 max-w-6xl mx-auto">
+      
+      {/* Section Header */}
+      <div className="text-center mb-16">
         
-      <div className="max-w-5xl mx-auto text-center pt-20">
+        {/* Label */}
         <motion.p
-          className="text-sm font-semibold tracking-widest uppercase mb-3
-          
-          text-primary
-          dark:text-blue-400"
+          className="text-sm font-semibold tracking-widest uppercase mb-3 text-primary"
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -60,37 +60,31 @@ export default function Features() {
           Features
         </motion.p>
 
+        {/* Heading */}
         <motion.h2
-          className="text-4xl md:text-5xl font-bold mb-4
-          
-          text-foreground
-          dark:text-blue-100"
+          className="text-3xl md:text-5xl font-bold text-foreground mb-4 tracking-tight"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-         Powerful Proctoring Features
+          Powerful Proctoring Features
         </motion.h2>
 
+        {/* Description */}
         <motion.p
-          className="max-w-lg mx-auto mb-16
-          
-          text-muted-foreground
-          dark:text-blue-300/80"
+          className="max-w-xl mx-auto text-muted-foreground text-base md:text-lg"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           Enterprise-grade monitoring to ensure exam integrity at every step.
-
-
         </motion.p>
-        </div>
-      </motion.div>
+      </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Cards Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {features.map((f, i) => (
           <FeatureCard key={f.title} {...f} index={i} />
         ))}
