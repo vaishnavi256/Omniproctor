@@ -99,7 +99,7 @@ const Login = () => {
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
-          className="w-full max-w-md"
+          className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg border border-gray-200"
         >
           {/* Header */}
           <div className="text-center mb-10">

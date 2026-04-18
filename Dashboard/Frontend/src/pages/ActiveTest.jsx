@@ -11,20 +11,29 @@ const ActiveTests = () => {
   const adminId = localStorage.getItem("adminId");
 
   useEffect(() => {
-    const fetchTests = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3000/api/tests/active/${adminId}`);
-        setTests(response.data || []);
-      } catch (err) {
-        console.error("Error fetching tests:", err);
-        setError("Failed to fetch tests. Please try again later.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  if (!adminId) {
+    setError("Admin not logged in");
+    setLoading(false);
+    return;
+  }
 
-    fetchTests();
-  }, []);
+  const fetchTests = async () => {
+    try {
+      const response = await axios.get(
+        `http://localhost:3000/api/tests/active/${adminId}`
+      );
+      setTests(response.data || []);
+    } catch (err) {
+      console.error("Error fetching tests:", err);
+      setError("Failed to fetch tests. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchTests();
+}, [adminId]);
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100">
