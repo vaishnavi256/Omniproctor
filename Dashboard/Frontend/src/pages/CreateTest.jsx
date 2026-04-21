@@ -1,6 +1,8 @@
-import Navbar from "../components/Navbar";
 import { useState } from "react";
 import axios from "axios";
+import { motion } from "framer-motion";
+import DashboardNavbar from "@/components/DashboardNavbar";
+import { PlusCircle } from "lucide-react";
 
 const CreateTest = () => {
   const [name, setName] = useState("");
@@ -22,49 +24,85 @@ const CreateTest = () => {
           },
         }
       );
-      console.log("Test created:", response.data);
+
       alert("Test created successfully!");
-      setLink("");
       setName("");
+      setLink("");
     } catch (error) {
-      console.error("Failed to create test:", error);
-      alert("Failed to create test. Please try again.");
+      console.error("Failed:", error);
+      alert("Failed to create test");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <Navbar />
-      <div className="p-8 max-w-xl mx-auto">
-        <h2 className="text-xl font-semibold mb-6">Create New Test</h2>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label className="block mb-2 text-gray-700">Test Name</label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Enter test name"
-              className="w-full border p-2 rounded-md focus:ring-2 focus:ring-purple-500"
-              required
-            />
-          </div>
-          <div>
-            <label className="block mb-2 text-gray-700">Test Link</label>
-            <input
-              type="text"
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-              placeholder="Enter test link"
-              className="w-full border p-2 rounded-md focus:ring-2 focus:ring-purple-500"
-              required
-            />
-          </div>
-          <button className="bg-purple-600 text-white px-5 py-2 rounded-md hover:bg-purple-700">
-            Create Test
-          </button>
-        </form>
-      </div>
+    <div className="min-h-screen bg-background">
+      <DashboardNavbar />
+
+      <main className="max-w-3xl mx-auto px-6 py-10">
+        
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: -12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-8"
+        >
+          <h1 className="text-3xl font-bold text-foreground flex items-center gap-2">
+            <PlusCircle className="h-7 w-7 text-primary" />
+            Create New Test
+          </h1>
+        </motion.div>
+
+        {/* Form Card */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="bg-card border border-border rounded-xl p-8 shadow-sm"
+        >
+          <form onSubmit={handleSubmit} className="space-y-6">
+
+            {/* Test Name */}
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Test Name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter test name"
+                className="w-full bg-background border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+                required
+              />
+            </div>
+
+            {/* Test Link */}
+            <div>
+              <label className="block text-sm font-medium text-foreground mb-2">
+                Test Link
+              </label>
+              <input
+                type="text"
+                value={link}
+                onChange={(e) => setLink(e.target.value)}
+                placeholder="Enter test link"
+                className="w-full bg-background border border-border rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40 transition"
+                required
+              />
+            </div>
+
+            {/* Button */}
+            <button
+              type="submit"
+              className="w-full bg-accent-foreground from-primary to-accent text-primary-foreground py-2.5 rounded-lg font-medium hover:opacity-90 transition-all duration-300"
+            >
+              Create Test
+            </button>
+
+          </form>
+        </motion.div>
+      </main>
     </div>
   );
 };

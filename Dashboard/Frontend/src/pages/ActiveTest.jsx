@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import TestCard from "../components/TestCard";
 import { motion } from "framer-motion";
 import axios from "axios";
+import DashboardNavbar from "@/components/DashboardNavbar";
+import TestCard from "../components/TestCard";
+import { ClipboardList, PlusCircle } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const ActiveTests = () => {
   const [tests, setTests] = useState([]);
@@ -11,70 +13,95 @@ const ActiveTests = () => {
   const adminId = localStorage.getItem("adminId");
 
   useEffect(() => {
-  if (!adminId) {
-    setError("Admin not logged in");
-    setLoading(false);
-    return;
-  }
-
-  const fetchTests = async () => {
-    try {
-      const response = await axios.get(
-        `http://localhost:3000/api/tests/active/${adminId}`
-      );
-      setTests(response.data || []);
-    } catch (err) {
-      console.error("Error fetching tests:", err);
-      setError("Failed to fetch tests. Please try again later.");
-    } finally {
+    if (!adminId) {
+      setError("Admin not logged in");
       setLoading(false);
+      return;
     }
-  };
 
-  fetchTests();
-}, [adminId]);
+    const fetchTests = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/tests/active/${adminId}`
+        );
+        setTests(response.data || []);
+      } catch (err) {
+        console.error("Error fetching tests:", err);
+        setError("Failed to fetch tests.");
+      } finally {
+        setLoading(false);
+      }
+    };
 
+    fetchTests();
+  }, [adminId]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-indigo-50 to-slate-100">
-      <Navbar />
+    <div className="min-h-screen bg-background">
+      <DashboardNavbar />
 
-      <div className="max-w-6xl mx-auto px-6 py-10">
+      <main className="max-w-7xl mx-auto px-6 py-10">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="flex justify-between items-center mb-10"
+          transition={{ duration: 0.45 }}
+          className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12"
         >
-          <h2 className="text-3xl font-semibold text-slate-800 tracking-tight">
-            Active Tests
-          </h2>
+          <div>
+            <p className="text-sm tracking-wide uppercase text-primary font-semibold mb-2">
+              Manage Assessments
+            </p>
+
+            <h1 className="text-4xl font-bold text-foreground flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-primary/10 border border-primary/20">
+                <ClipboardList className="h-6 w-6 text-primary" />
+              </div>
+              Active Tests
+            </h1>
+
+            <p className="text-muted-foreground mt-3 text-sm">
+              View and manage all currently active assessments.
+            </p>
+          </div>
+
+          <Link
+            to="/create"
+            className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-accent text-primary-foreground px-5 py-3 rounded-xl text-sm font-semibold shadow-md hover:shadow-lg hover:scale-[1.02] transition-all duration-300"
+          >
+            <PlusCircle className="h-4 w-4" />
+            Create Test
+          </Link>
         </motion.div>
 
-        {/* Loading State */}
+        {/* Loading */}
         {loading && (
-          <div className="flex justify-center items-center h-48">
-            <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-indigo-600"></div>
+          <div className="flex flex-col items-center justify-center h-52 gap-4">
+            <div className="h-12 w-12 rounded-full border-2 border-border border-t-primary animate-spin"></div>
+            <p className="text-muted-foreground text-sm">
+              Loading active tests...
+            </p>
           </div>
         )}
 
-        {/* Error State */}
+        {/* Error */}
         {error && (
-          <div className="text-center text-red-500 font-medium">{error}</div>
+          <div className="text-center py-12">
+            <p className="text-red-500 font-medium">{error}</p>
+          </div>
         )}
 
-        {/* Test Cards */}
+        {/* Cards */}
         {!loading && !error && tests.length > 0 && (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
             {tests.map((test, index) => (
               <motion.div
                 key={test.id}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.06 }}
               >
-                <TestCard name={test.name} id={test.id} />
+                  <TestCard name={test.name} id={test.id} />
               </motion.div>
             ))}
           </div>
@@ -85,20 +112,32 @@ const ActiveTests = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center mt-20"
+            className="text-center mt-24 max-w-md mx-auto"
           >
-            <h3 className="text-xl font-semibold text-slate-600 mb-2">
-              No Active Tests Found
+            <div className="flex justify-center mb-6">
+              <div className="p-5 rounded-2xl bg-muted/40 border border-border">
+                <ClipboardList className="h-10 w-10 text-muted-foreground" />
+              </div>
+            </div>
+
+            <h3 className="text-2xl font-semibold text-foreground mb-3">
+              No Active Tests
             </h3>
-            <p className="text-slate-500 mb-4">
-              Looks like you haven’t created any tests yet.
+
+            <p className="text-muted-foreground mb-8 leading-relaxed">
+              You haven’t created any active assessments yet. Start by creating
+              your first test.
             </p>
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white font-medium px-6 py-2 rounded-lg shadow-md transition-all duration-300">
-              Create a Test
-            </button>
+
+            <Link
+              to="/create"
+            >
+              <PlusCircle className="h-4 w-4" />
+              Create Test
+            </Link>
           </motion.div>
         )}
-      </div>
+      </main>
     </div>
   );
 };
