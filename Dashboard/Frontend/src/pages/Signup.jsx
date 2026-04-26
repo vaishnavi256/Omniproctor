@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { Lock, Mail, User, Shield, Eye, EyeOff } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -20,7 +21,7 @@ const Signup = () => {
     setMessage("");
 
     try {
-      const res = await axios.post("http://localhost:3000/auth/signup", {
+      const res = await axios.post("https://omniproctor-is85.vercel.app/auth/signup", {
         name,
         email,
         password,
@@ -169,6 +170,17 @@ const Signup = () => {
             >
               {loading ? "Loading..." : "Sign Up"}
             </Button>
+
+            {/* Redirect to Login */}
+            <div className="text-center text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link
+                to="/login"
+                className="font-medium text-black hover:underline"
+              >
+                Sign in
+              </Link>
+            </div>
 
             {/* Message */}
             <AnimatePresence>

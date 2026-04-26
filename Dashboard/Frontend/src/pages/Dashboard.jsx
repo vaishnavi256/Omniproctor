@@ -4,7 +4,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import { FiClipboard, FiPlusCircle } from "react-icons/fi";
-import { ClipboardList, PlusCircle, TrendingUp, Users, Activity, ArrowRight } from "lucide-react";
+import { ClipboardList, PlusCircle, TrendingUp, Users, Activity, ArrowRight, ShieldAlert } from "lucide-react";
 import DashboardNavbar from "@/components/DashboardNavbar";
 
 
@@ -53,6 +53,13 @@ const actionCards = [
     to: "/create",
     gradient: "from-accent to-primary",
   },
+  {
+    title: "Suspicious Logs",
+    description: "Review suspicious activity detected during candidate assessments.",
+    icon: ShieldAlert,
+    to: "/logs",
+    gradient: "from-red-500 to-orange-500",
+  }
 ];
 
 
@@ -84,7 +91,7 @@ const item = {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/api/users/count");
+        const response = await axios.get("https://omniproctor-is85.vercel.app/api/users/count");
       setTotalUsers(response.data.count);
       console.log("Total users fetched:", response.data.count);
     } catch (error) {
@@ -151,7 +158,7 @@ const item = {
           transition={{ delay: 0.3 }}
         >
           <h2 className="text-lg font-semibold text-foreground mb-5">Quick Actions</h2>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <div className="grid sm:grid-cols-3 gap-5">
             {actionCards.map((card, idx) => (
               <Link
                 key={idx}

@@ -11,7 +11,6 @@ const ViewTest = () => {
 
   const [testInfo, setTestInfo] = useState({});
   const [users, setUsers] = useState([]);
-  // const [alerts, setAlerts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,8 +18,8 @@ const ViewTest = () => {
     const fetchTestData = async () => {
       try {
         const [testRes, userRes] = await Promise.all([
-          axios.get(`http://localhost:3000/api/tests/${id}`),
-          axios.get(`http://localhost:3000/api/tests/${id}/users`),
+          axios.get(`https://omniproctor-is85.vercel.app/api/tests/${id}`),
+          axios.get(`https://omniproctor-is85.vercel.app/api/tests/${id}/users`),
           // axios.get(`/api/tests/${id}/alerts`)
         ]);
         setTestInfo(testRes.data);

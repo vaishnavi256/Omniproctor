@@ -13,7 +13,7 @@ const CreateTest = () => {
     e.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/tests/addTest",
+        "https://omniproctor-is85.vercel.app/api/tests/addTest",
         {
           url: link,
           name,

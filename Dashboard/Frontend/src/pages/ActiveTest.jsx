@@ -22,7 +22,7 @@ const ActiveTests = () => {
     const fetchTests = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/tests/active/${adminId}`
+          `https://omniproctor-is85.vercel.app/api/tests/active/${adminId}`
         );
         setTests(response.data || []);
       } catch (err) {

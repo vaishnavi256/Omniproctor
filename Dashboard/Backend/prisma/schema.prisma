@@ -38,7 +38,7 @@ model Test {
   name      String
   date      DateTime
   time      String
-  isActive  Boolean   @default(true)
+  isActive  Boolean   @default(false)
 
   admin     Admin     @relation(fields: [adminId], references: [id])
   userTests UserTest[]
